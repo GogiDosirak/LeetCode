@@ -11,7 +11,7 @@ class Solution {
                 count++;
             }
 
-            if(count > k) {
+            while(count > k) {
                 if(nums[lt] == 0) {
                     curr--;
                     count--;
