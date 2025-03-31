@@ -9,13 +9,13 @@ class Solution {
             answer[i] = -1;
         }
 
-        int sum = 0;
+        long sum = 0; // 오버플로우 방지 
         for(int i = 0; i < nums.length; i++) {
             sum += nums[i];
             if(i - (k * 2) < 0) {
                 continue;
             }
-            answer[i - k] = sum/(k*2+1);
+            answer[i - k] = (int) (sum/(k*2+1));
             
             // 한 칸 이동 
             sum-=nums[i-(2*k)];
