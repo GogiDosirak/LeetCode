@@ -10,7 +10,7 @@ class Solution {
         int answer = 0;
         int[] prefix = new int[nums.length];
         prefix[0] = nums[0];
-        int min = Integer.MAX_VALUE;
+        int min = prefix[0];
         for(int i = 1; i < nums.length; i++ ) {
             prefix[i] = prefix[i-1] + nums[i];
             min = Math.min(min, prefix[i]);
