@@ -1,25 +1,28 @@
 class Solution {
     public int[] getAverages(int[] nums, int k) {
-        if(k == 0) {
-            return nums;
-        }
-        int[] answer = new int[nums.length];
-
-        for(int i = 0; i < nums.length; i++) {
-            answer[i] = -1;
+        long[] prefixSum = new long[nums.length];
+        prefixSum[0] = nums[0];
+        for(int i = 1; i < nums.length; i++) {
+            prefixSum[i] = prefixSum[i-1] + nums[i];
         }
 
-        long sum = 0; // 오버플로우 방지 
-        for(int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if(i - (k * 2) < 0) {
-                continue;
-            }
-            answer[i - k] = (int) (sum/(k*2+1));
-            
-            // 한 칸 이동 
-            sum-=nums[i-(2*k)];
+        int answer[] = new int[nums.length];
+        Arrays.fill(answer, -1); // 굳이 for문 돌 필요 X
+
+        if(2 * k + 1 > nums.length) {
+           return answer;
         }
+
+        int lt = 0;
+        long sum = 0;
+        answer[k] = (int) (prefixSum[2 * k] / (2*k+1));
+
+        for(int rt = 2 * k + 1; rt < nums.length; rt++) {
+           sum = prefixSum[rt] - prefixSum[lt];
+           lt++;
+           answer[rt - k] = (int) (sum / (2*k+1));
+        }
+
         return answer;
-    }
+  }
 }
