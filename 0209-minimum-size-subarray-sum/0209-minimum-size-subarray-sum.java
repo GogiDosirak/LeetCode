@@ -3,8 +3,7 @@
       public int minSubArrayLen(int target, int[] nums) {
         int lt = 0;
         int sum = 0;
-        int answer = nums.length;
-        boolean flag = false;
+        int answer = Integer.MAX_VALUE;
 
         for (int rt = 0; rt < nums.length; rt++) {
           sum += nums[rt];
@@ -15,9 +14,9 @@
             flag = true;
           }
         }
-        if (!flag) {
+        if (answer == Integer.MAX_VALUE) {
           return 0;
       }
        return answer;
     }
-    }
+ }
