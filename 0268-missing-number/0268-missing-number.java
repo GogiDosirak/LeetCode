@@ -1,15 +1,16 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        Set<Integer> set = new HashSet<>();
-        for(int n : nums) {
-            set.add(n);
+        int expectedSum = 0;
+        int actualSum = 0;
+
+        for(int i = 1; i <= nums.length; i++) {
+            expectedSum += i;
         }
 
-        for(int i = 0; i <= nums.length; i++) {
-            if(!set.contains(i)) {
-                return i;
-            }
+        for(int i = 0; i < nums.length; i++) {
+            actualSum += nums[i];
         }
-        return 1;
+        
+        return expectedSum - actualSum;
     }
 }
