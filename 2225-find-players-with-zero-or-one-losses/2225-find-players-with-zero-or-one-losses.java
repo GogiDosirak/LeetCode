@@ -1,10 +1,10 @@
 class Solution {
     public List<List<Integer>> findWinners(int[][] matches) {
-        Map<Integer, Integer> lostMap = new TreeMap<>();
+        Map<Integer, Integer> lostMap = new HashMap<>();
         List<List<Integer>> answer = new ArrayList<>();
 
         answer.add(new ArrayList<>());
-        answer.add(new ArrayList<>()); // 또는 List<List<Integer>> answer = Arrays.asList(new A)
+        answer.add(new ArrayList<>()); // 또는 List<List<Integer>> answer = Arrays.asList(new)
 
         for(int[] arr : matches) {
             int winner = arr[0];
@@ -22,8 +22,8 @@ class Solution {
             }
         }
 
-        // Collections.sort(answer.get(0));    // 내부적으로 O(NlogN) 정렬, 정렬이 문제에 등장하면 O(NlogN)을 깔고 들어간다고 보면됨.
-        // Collections.sort(answer.get(1));
+        Collections.sort(answer.get(0));    // 내부적으로 O(NlogN) 정렬, 정렬이 문제에 등장하면 O(NlogN)을 깔고 들어간다고 보면됨.
+        Collections.sort(answer.get(1));
 
         return answer;
     }
