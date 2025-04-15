@@ -6,26 +6,25 @@ class Solution {
         answer.add(new ArrayList<>());
         answer.add(new ArrayList<>());
 
-        for(int i = 0; i < matches.length; i++) {
-            for(int j = 0; j < matches[0].length; j++) {
-                lostMap.put(matches[i][j], 0);
-            }
-        } 
+        for(int[] arr : matches) {
+            int winner = arr[0];
+            int loser = arr[1];
 
-        for(int i = 0; i < matches.length; i++) {
-           lostMap.put(matches[i][1], lostMap.getOrDefault(matches[i][1],0) + 1);
+            lostMap.put(winner, lostMap.getOrDefault(winner, 0)); // lostMap.putIfAbsent(winner, 0)도 사용 가능
+            lostMap.put(loser, lostMap.getOrDefault(loser, 0) + 1);
         }
 
-        for(int i : lostMap.keySet()) {
-            if(lostMap.getOrDefault(i,0) == 0) {
-                answer.get(0).add(i);
-            } else if(lostMap.get(i) == 1) {
-                answer.get(1).add(i);
+        for(int key : lostMap.keySet()) {
+            if(lostMap.get(key) == 0) {
+                answer.get(0).add(key);
+            } else if(lostMap.get(key) == 1) {
+                answer.get(1).add(key);
             }
         }
 
-        Collections.sort(answer.get(0));
+        Collections.sort(answer.get(0));    // 내부적으로 O(NlogN) 정렬, 정렬이 문제에 등장하면 O(NlogN)을 깔고 들어간다고 보면됨.
         Collections.sort(answer.get(1));
+
         return answer;
     }
 }
