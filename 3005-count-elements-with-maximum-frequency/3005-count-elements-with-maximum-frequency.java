@@ -7,10 +7,7 @@ class Solution {
 
         for(int n : nums) {
             map.put(n, map.getOrDefault(n,0) + 1);
-        }
-
-        for(int value : map.values()) {
-            max = Math.max(value, max);
+            max = Math.max(map.get(n), max);
         }
 
         for(int value : map.values()) {
