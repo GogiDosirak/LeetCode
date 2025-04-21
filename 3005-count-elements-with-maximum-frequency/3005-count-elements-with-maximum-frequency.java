@@ -7,11 +7,13 @@ class Solution {
 
         for(int n : nums) {
             map.put(n, map.getOrDefault(n,0) + 1);
-            max = Math.max(map.get(n), max);
         }
 
-        for(int key : map.keySet()) {
-            int value = map.get(key);
+        for(int value : map.values()) {
+            max = Math.max(value, max);
+        }
+
+        for(int value : map.values()) {
             if(value == max) {
                 answer += max;
             }
