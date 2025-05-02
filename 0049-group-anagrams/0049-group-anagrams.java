@@ -8,7 +8,7 @@ class Solution {
             String key = new String(arr);
 
             if(!map.containsKey(key)) {
-                map.put(key, new ArrayList<String>());
+                map.put(key, new ArrayList<>());
             }
             map.get(key).add(s);
         }
