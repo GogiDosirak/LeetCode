@@ -1,25 +1,17 @@
- class Solution {
- public int minimumCardPickup(int[] cards) {
- Map<Integer, List<Integer>> dic = new HashMap<>();
- for (int i = 0; i < cards.length; i++) {
- int num = cards[i];
- if (!dic.containsKey(num)) {
-                dic.put(num, new ArrayList<>());
+class Solution {
+    public int minimumCardPickup(int[] cards) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int answer = Integer.MAX_VALUE;
+
+        for(int i = 0; i < cards.length; i++) {
+            if(map.containsKey(cards[i])) {
+                answer = Math.min(answer, i - map.get(cards[i]) + 1);
             }
-            dic.get(num).add(i);
+            map.put(cards[i], i);
         }
- int ans = Integer.MAX_VALUE;
- for (int key: dic.keySet()) {
- List<Integer> arr = dic.get(key);
- for (int i = 0; i < arr.size() - 1; i++) {
-                ans 
-= Math.min(ans, arr.get(i + 1) - arr.get(i) + 1);
-            }
-        }
- if (ans == Integer.MAX_VALUE) {
- return -1;
-        }
- return ans;
+
+        if(answer == Integer.MAX_VALUE) return -1;
+        return answer;
+
     }
- }
- 
+}
