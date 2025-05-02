@@ -1,32 +1,25 @@
 class Solution {
     public int maximumSum(int[] nums) {
-        Map<Integer, List<Integer>> map = new HashMap<>();
-        int answer = Integer.MIN_VALUE;
+        Map<Integer, Integer> map = new HashMap<>();
+        int answer = -1;
 
         for(int i = 0; i < nums.length; i++) {
             int sum = 0;
-            String s = String.valueOf(nums[i]);
-            for(char c : s.toCharArray()) {
-                sum += c - '0';
+            int n = nums[i];
+            while(n > 0) {
+                sum += n % 10;
+                n /= 10;
             }
 
-            if(!map.containsKey(sum)) {
-                map.put(sum, new ArrayList<>());
+            if(map.containsKey(sum)) {
+                answer = Math.max(answer, nums[i] + map.get(sum));
             }
-            map.get(sum).add(nums[i]);
+            map.put(sum, Math.max(map.getOrDefault(sum, 0),nums[i] ));
         }
 
-        for(List<Integer> list: map.values()) {
-            if(list.size() >= 2) {
-                for(int i = 0; i < list.size(); i++) {
-                    for(int j = i+1; j < list.size(); j++) {
-                        answer = Math.max(answer, list.get(i) + list.get(j));
-                    }
-                }
-            }
-        }
-        if(answer == Integer.MIN_VALUE) return -1;
         return answer;
+
+
 
         
     }
