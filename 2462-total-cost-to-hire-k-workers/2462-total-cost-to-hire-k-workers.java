@@ -18,7 +18,7 @@ class Solution {
         if(left <= right) {
         for(int i = 0; i < candidates && left <= right; i++) {
             heap.add(right--);
-        }
+            }
         }
 
         for(int i = 0; i < k; i++) {
