@@ -1,33 +1,27 @@
 class SmallestInfiniteSet {
-    PriorityQueue<Integer> heap = new PriorityQueue<>();
-    Set<Integer> set = new HashSet<>();
-    int n = 1;
+    private int current;
+    private PriorityQueue<Integer> minHeap;
+    private Set<Integer> addedBack;
 
     public SmallestInfiniteSet() {
-        set.add(1);
-        heap.add(1);
+        current = 1;
+        minHeap = new PriorityQueue<>();
+        addedBack = new HashSet<>();
     }
-    
-    public int popSmallest() {
-        int x = heap.poll();
-        set.remove(x);
-        heap.add(++n);
-        set.add(n);
 
-        return x;
+    public int popSmallest() {
+        if (!minHeap.isEmpty()) {
+            int smallest = minHeap.poll();
+            addedBack.remove(smallest);
+            return smallest;
+        }
+        return current++;
     }
-    
+
     public void addBack(int num) {
-        if(!set.contains(num) && n > num) {
-            heap.add(num);
-            set.add(num);
+        if (num < current && !addedBack.contains(num)) {
+            minHeap.offer(num);
+            addedBack.add(num);
         }
     }
 }
-
-/**
- * Your SmallestInfiniteSet object will be instantiated and called as such:
- * SmallestInfiniteSet obj = new SmallestInfiniteSet();
- * int param_1 = obj.popSmallest();
- * obj.addBack(num);
- */
