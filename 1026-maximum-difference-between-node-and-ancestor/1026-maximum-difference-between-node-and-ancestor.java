@@ -28,8 +28,8 @@ class Solution {
         max = Math.max(max, node.val);
         min = Math.min(min, node.val);
 
-        if (node.left == null && node.right == null) {
-            answer = Math.max(answer, max - min);
+        if(node.left == null && node.right == null) {
+            asnwer = Math.max(answer, max - min);
         }
 
         DFS(node.left, max, min);
