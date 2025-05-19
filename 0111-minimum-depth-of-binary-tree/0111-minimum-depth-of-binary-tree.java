@@ -16,20 +16,20 @@
 class Solution {
     int answer = Integer.MAX_VALUE;
     public int minDepth(TreeNode root) {
-        if(root == null) {
+        if (root == null) {
             return 0;
         }
-
         DFS(root, 1);
         return answer;
+
     }
 
     public void DFS(TreeNode root, int depth) {
-        if(root == null) {
+        if (root == null) {
             return;
         }
 
-        if(root.left == null && root.right == null) { // 리프 노드에 도착했을 때만 최소 depth 계산 
+        if(root.left == null && root.right == null) {
             answer = Math.min(answer, depth);
         }
 
