@@ -29,7 +29,7 @@ class Solution {
         min = Math.min(min, node.val);
 
         if(node.left == null && node.right == null) {
-            asnwer = Math.max(answer, max - min);
+            answer = Math.max(answer, max - min);
         }
 
         DFS(node.left, max, min);
