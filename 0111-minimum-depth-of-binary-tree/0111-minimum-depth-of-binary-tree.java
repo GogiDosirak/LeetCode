@@ -14,26 +14,21 @@
  * }
  */
 class Solution {
-    int answer = Integer.MAX_VALUE;
     public int minDepth(TreeNode root) {
-        if (root == null) {
+        if(root == null) {
             return 0;
         }
-        DFS(root, 1);
-        return answer;
 
-    }
+        int left = minDepth(root.left);
+        int right = minDepth(root.right);
 
-    public void DFS(TreeNode root, int depth) {
-        if (root == null) {
-            return;
+        if(left == 0) {
+            return right + 1;
         }
 
-        if(root.left == null && root.right == null) {
-            answer = Math.min(answer, depth);
+        if (right == 0) {
+            return left + 1;
         }
-
-        DFS(root.left, depth+1);
-        DFS(root.right, depth+1);
+        return Math.min(left, right) + 1;
     }
 }
