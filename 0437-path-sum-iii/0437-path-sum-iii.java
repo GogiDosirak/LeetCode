@@ -25,7 +25,7 @@ class Solution {
         return answer;
     }
 
-    public void DFS(TreeNode node, int sum, int targetSum) {
+    public void DFS(TreeNode node, long sum, int targetSum) {
         if(node == null) {
             return;
         }
