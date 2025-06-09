@@ -1,4 +1,5 @@
 class Solution {
+    boolean flag;
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         List<List<Integer>> graph = new ArrayList<>();
         boolean[] ch = new boolean[n]; 
@@ -11,21 +12,22 @@ class Solution {
             graph.get(edge[1]).add(edge[0]);
         }
 
-        return DFS(graph, ch, source, destination, source);
+        DFS(graph, ch, source, destination, source);
+
+        return flag;
     }
 
-    public boolean DFS(List<List<Integer>> graph, boolean[] ch, int source, int destination, int n) {
+    public void DFS(List<List<Integer>> graph, boolean[] ch, int source, int destination, int n) {
         if(n == destination) {
-            return true;
+            flag = true;
+            return;
         }
         ch[n] = true;
         for(int x : graph.get(n)) {
             if(ch[x] != true) {
-                if(DFS(graph, ch, source, destination, x)) {
-                    return true;
-                }
+                DFS(graph, ch, source, destination, x);
             }
         }
-        return false;
+        return;
     }
 }
