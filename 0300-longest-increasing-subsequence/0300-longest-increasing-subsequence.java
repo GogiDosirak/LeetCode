@@ -9,10 +9,12 @@ class Solution {
         int answer = 0;
 
         for(int i = 0; i < n ; i++) {
+            int max = 0;
             for(int j = 0; j < i; j++) {
                 if(nums[i] > nums[j]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                    max = Math.max(max, dp[j]);
                 }
+                dp[i] = max + 1;
                 answer = Math.max(answer, dp[i]);
             }
         }
