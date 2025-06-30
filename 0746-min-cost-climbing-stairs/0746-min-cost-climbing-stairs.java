@@ -4,7 +4,6 @@ class Solution {
         if(n == 0) return 0;
         if(n == 1) return cost[0];
         if(n == 2) return Math.min(cost[0], cost[1]);
-        if(n == 3) return Math.min(cost[1], cost[0] + cost[2]);
 
         int[] dp = new int[n];
         dp[0] = cost[0];
