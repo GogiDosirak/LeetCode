@@ -5,7 +5,6 @@ class Solution {
 
         if(n == 0) return 0;
         if(n == 1) return cost[0];
-        if(n == 2) return Math.min(cost[0], cost[1]);
 
         dp[0] = cost[0];
         dp[1] = cost[1];
