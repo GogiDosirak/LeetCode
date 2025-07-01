@@ -4,7 +4,6 @@ class Solution {
         int[] dp = new int[n];
         if(n == 1) return 1;
         dp[0] = 1;
-        dp[1] = nums[1] > nums[0] ? 2 : 1;
         int answer = 0;
 
         for(int i = 1; i < n; i++) {
