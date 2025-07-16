@@ -1,12 +1,13 @@
 class Solution {
     public int smallestDivisor(int[] nums, int threshold) {
-        Arrays.sort(nums);
-
         int n = nums.length;
         int lt = 1;
-        int rt = nums[n-1];
-        int mid = (lt + rt) / 2;
+        int rt = Integer.MIN_VALUE;
         int answer = Integer.MAX_VALUE;
+        for(int num : nums) {
+            rt = Math.max(rt, num);
+        }
+        int mid = (lt + rt) / 2;
 
         while(lt <= rt) {
             int sum = 0;
