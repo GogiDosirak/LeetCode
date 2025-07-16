@@ -7,10 +7,10 @@ class Solution {
         for(int num : nums) {
             rt = Math.max(rt, num);
         }
-        int mid = (lt + rt) / 2;
 
         while(lt <= rt) {
             int sum = 0;
+            int mid = (lt + rt) / 2;
             for(int i = 0; i < n; i++) {
                 int temp = nums[i] / mid;
                 if(nums[i] % mid == 0) {
@@ -21,11 +21,9 @@ class Solution {
             }
             if(sum > threshold) {
                 lt = mid + 1;
-                mid = (lt + rt) / 2;
             } else {
                 answer = Math.min(answer, mid);
                 rt = mid - 1;
-                mid = (lt + rt) / 2;
             }
         }
         return answer;  
