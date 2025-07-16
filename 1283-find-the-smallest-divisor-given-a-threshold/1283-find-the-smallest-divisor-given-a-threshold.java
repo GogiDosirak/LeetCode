@@ -12,12 +12,8 @@ class Solution {
         while(lt <= rt) {
             int sum = 0;
             for(int i = 0; i < n; i++) {
-                int temp = nums[i] / mid;
-                if(nums[i] % mid == 0) {
-                    sum += temp;
-                } else {
-                    sum += temp + 1;
-                }
+                double temp = (double)nums[i] / mid;
+                sum += Math.ceil(temp);
             }
             if(sum > threshold) {
                 lt = mid + 1;
