@@ -1,33 +1,32 @@
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-       int mergeIndex = m+n-1;
-       int i = m-1;
-       int j = n-1;
-        while(i >= 0 && j >= 0) {
-            if(nums1[i] < nums2[j]) {
-                nums1[mergeIndex] = nums2[j];
-                j--;
+        // 거꾸로부터 채우는게 편하다 - 왜? 뒤엔 0으로 채워져있고, 앞에서부터 채우면 따로 상태를 유지해야함
+        int mergeIndex = m+n-1;
+        int lt = m-1;
+        int rt = n-1;
+
+        while(lt >= 0 && rt >= 0) {
+            if(nums1[lt] >= nums2[rt]) {
+                nums1[mergeIndex] = nums1[lt];
+                lt--;
                 mergeIndex--;
             } else {
-                nums1[mergeIndex] = nums1[i];
-                i--;
+                nums1[mergeIndex] = nums2[rt];
+                rt--;
                 mergeIndex--;
             }
         }
-        // 비교할게 없어서 나왔다면, 남아있는건 다 작은 숫자이므로 차례대로 넣어주면 된다.
-        while(i >= 0) {
-            nums1[mergeIndex] = nums1[i];
-            i--;
-            mergeIndex--;
-        }
-           while(j >= 0) {
-            nums1[mergeIndex] = nums2[j];
-            j--;
+
+        while(lt >= 0) {
+            nums1[mergeIndex] = nums1[lt];
+            lt--;
             mergeIndex--;
         }
 
-
-
-
+        while(rt >= 0) {
+            nums1[mergeIndex] = nums2[rt];
+            rt--;
+            mergeIndex--;
+        }
     }
 }
