@@ -1,25 +1,37 @@
 class Solution {
     public int[] getAverages(int[] nums, int k) {
-        if(k == 0) {
-            return nums;
-        }
         int[] answer = new int[nums.length];
 
-        for(int i = 0; i < nums.length; i++) {
+        int lt = 0;
+        int rt = 2*k;
+        int windowSize = rt - lt + 1;
+
+        for(int i = 0; i < answer.length; i++) {
             answer[i] = -1;
         }
 
-        long sum = 0; // 오버플로우 방지 
-        for(int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if(i - (k * 2) < 0) {
-                continue;
-            }
-            answer[i - k] = (int) (sum/(k*2+1));
-            
-            // 한 칸 이동 
-            sum-=nums[i-(2*k)];
+        if(nums.length < 2 * k + 1) {
+            return answer;
         }
-        return answer;
-    }
+
+        if(k == 0) return nums;
+
+        long sum = 0;
+        for(int i = 0; i <= rt; i++) {
+            sum += nums[i];
+        }
+
+        answer[k] = (int) (sum / windowSize);
+
+
+        for(int i = rt + 1; i < nums.length; i++) {
+            sum -= nums[lt];
+            sum += nums[i];
+            lt++;
+
+            answer[i - k] = (int)(sum / windowSize); 
+        }
+
+        return answer;    
+  }
 }
