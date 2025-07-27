@@ -4,13 +4,12 @@ class Solution {
 
         int lt = 0;
         int rt = 2*k;
-        int windowSize = rt - lt + 1;
 
         for(int i = 0; i < answer.length; i++) {
             answer[i] = -1;
         }
 
-        if(nums.length < 2 * k + 1) {
+        if(nums.length - 1 < rt) {
             return answer;
         }
 
@@ -21,7 +20,7 @@ class Solution {
             sum += nums[i];
         }
 
-        answer[k] = (int) (sum / windowSize);
+        answer[(lt+rt)/2] = (int)(sum / (rt-lt+1));
 
 
         for(int i = rt + 1; i < nums.length; i++) {
@@ -29,7 +28,7 @@ class Solution {
             sum += nums[i];
             lt++;
 
-            answer[i - k] = (int)(sum / windowSize); 
+            answer[(i+lt)/2] = (int)(sum / (i-lt+1)); 
         }
 
         return answer;    
