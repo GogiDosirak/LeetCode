@@ -1,25 +1,25 @@
 class Solution {
     public String reverseOnlyLetters(String s) {
-        char[] arr = s.toCharArray();
+        char[] ch = s.toCharArray();
+
         int lt = 0;
-        int rt = s.length()-1;
+        int rt = ch.length - 1;
 
         while(lt < rt) {
-            if(!Character.isAlphabetic(arr[lt])) {
+            if(Character.isAlphabetic(ch[lt]) && Character.isAlphabetic(ch[rt])) {
+                char temp = ch[lt];
+                ch[lt] = ch[rt];
+                ch[rt] = temp;
                 lt++;
-                continue;
-            } 
-            if(!Character.isAlphabetic(arr[rt])) {
                 rt--;
-                continue;
+            } else if(!Character.isAlphabetic(ch[lt])){
+                lt++;
+            } else {
+                rt--;
             }
-            // 아닌 경우에만 swap 진행
-            char tmp = arr[lt];
-            arr[lt] = arr[rt];
-            arr[rt] = tmp;
-            lt++;
-            rt--;
         }
-        return new String(arr);
+
+        return new String(ch);
+        
     }
 }
