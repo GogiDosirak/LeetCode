@@ -1,22 +1,25 @@
 class Solution {
     public int halveArray(int[] nums) {
-        int count = 0;
-        PriorityQueue<Double> heap = new PriorityQueue<>(Comparator.reverseOrder());
-        double target = 0;
+        int answer = 0;
+        double sum = 0;
+        PriorityQueue<Double> queue = new PriorityQueue<>(Comparator.reverseOrder());
 
         for(double n : nums) {
-            target += n;
-            heap.add(n);
+            sum += n;
+            queue.add(n);
         }
 
-        target /= 2;
-        while(target > 0) {
-            count++;
-            double x = heap.poll();
-            target -= (x/2);
-            heap.add(x/2);
+        double goal = (double)sum/2;
+        
+        for(int i = 0; i < nums.length; i++) {
+            double curr = queue.poll();
+            sum -= curr/2;
+            queue.add(curr/2);
+            answer++;
+            if(sum <= goal) {
+                break;
+            }
         }
-
-        return count;
+        return answer;     
     }
 }
