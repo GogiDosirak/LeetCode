@@ -1,13 +1,15 @@
 class Solution {
     public int largestAltitude(int[] gain) {
-        int[] prefixSum = new int[gain.length]; 
-        prefixSum[0] = gain[0];
-        int answer = Math.max(0, prefixSum[0]); // 0을 자연스레 포함시킴
-        for(int i = 1; i < prefixSum.length; i++) {
-            prefixSum[i] = prefixSum[i-1] + gain[i]; 
-            answer = Math.max(answer, prefixSum[i]);
+        int[] prefix = new int[gain.length + 1];
+        prefix[0] = 0;
+        prefix[1] = gain[0];
+        int max = Math.max(prefix[0], prefix[1]);
+
+        for(int i = 2; i < prefix.length; i++) {
+            prefix[i] = prefix[i-1] + gain[i-1];
+            max = Math.max(max, prefix[i]);
         }
 
-        return answer;
+        return max;
     }
 }
