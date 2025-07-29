@@ -4,7 +4,7 @@ class Solution {
     public int nearestExit(char[][] maze, int[] entrance) {
         Queue<Node> queue = new LinkedList<>();
 
-        int level = 0;
+        int level = 1;
         queue.add(new Node(entrance[0], entrance[1]));
         maze[entrance[0]][entrance[1]] = '+';
 
@@ -17,7 +17,7 @@ class Solution {
                     int ny = node.y + dy[j];
                     if(nx >= 0 && nx < maze.length && ny >= 0 && ny < maze[0].length && maze[nx][ny] == '.') {
                         if(nx == 0 || nx == maze.length - 1 || ny == 0 || ny == maze[0].length - 1) {
-                            return level + 1;
+                            return level;
                         }
                         maze[nx][ny] = '+';
                         queue.add(new Node(nx, ny));
