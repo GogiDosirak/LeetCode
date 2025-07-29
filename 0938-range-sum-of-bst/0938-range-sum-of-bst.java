@@ -29,7 +29,11 @@ class Solution {
             sum += root.val;
         }
 
+        if(root.val > low) {
         rangeSumBST(root.left, low, high);
+        }
+        if(root.val < high) {
         rangeSumBST(root.right, low, high);
+        }
     }
 }
