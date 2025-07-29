@@ -12,7 +12,8 @@ class Solution {
             int size = queue.size();
             for(int i = 0; i < size; i++) {
                 Node node = queue.poll();
-                if((node.x != entrance[0] || node.y != entrance[1]) && (node.x == 0 || node.x == maze.length - 1 || node.y == maze[0].length - 1 || node.y == 0)) {
+                if(node.x == 0 || node.x == maze.length - 1 || node.y == maze[0].length - 1 || node.y == 0) {
+                    if(!(node.x == entrance[0] && node.y == entrance[1]))
                     return answer;
                 }
                 for(int j = 0; j < 4; j++) {
