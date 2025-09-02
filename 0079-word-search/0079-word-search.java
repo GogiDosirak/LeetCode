@@ -9,8 +9,10 @@ class Solution {
 
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
-                if(dfs(board, i, j, word, 0)) {
-                    return true;
+		        if(board[i][j] == word.charAt(0)) {
+                     if(dfs(board, i, j, word, 0)) {
+                        return true;
+                    }
                 }
             }
         }
