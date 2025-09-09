@@ -1,25 +1,29 @@
 class Solution {
-    int[] answer = new int[2];
-    List<Integer> list = new ArrayList<>();
     public int[] twoSum(int[] nums, int target) {
-        // 백트래킹
-        backtracking(nums, 0, target);
-        return answer;
-    }
+        int[] answer = new int[2];
+        int[][] arr = new int[nums.length][2];
+        for(int i = 0; i < nums.length; i++) {
+            arr[i][0] = nums[i];
+            arr[i][1] = i;
+        }
 
-    public void backtracking(int[] nums, int start, int target) {
-        if(list.size() == 2) {
-            if(nums[list.get(0)] + nums[list.get(1)] == target) {
-                answer[0] = list.get(0);
-                answer[1] = list.get(1);
+        Arrays.sort(arr, (a,b) -> a[0] - b[0]);
+
+        int lt = 0;
+        int rt = nums.length - 1;
+
+        while(lt <= rt) {
+            int sum = arr[lt][0] + arr[rt][0];
+            if(sum == target) {
+                answer[0] = arr[lt][1];
+                answer[1] = arr[rt][1];
+                break;
+            } else if(sum > target) {
+                rt--;
+            } else {
+                lt++;
             }
-            return; // 깊이 2 (list.size() == 2) 까지 내려오면 더 이상 탐색할 필요가 없다.
         }
-
-        for(int i = start; i < nums.length; i++) {
-            list.add(i);
-            backtracking(nums, i + 1, target);
-            list.remove(list.size() - 1);
-        }
+        return answer; 
     }
 }
