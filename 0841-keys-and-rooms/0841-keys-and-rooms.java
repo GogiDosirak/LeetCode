@@ -18,10 +18,10 @@ class Solution {
             int size = queue.size();
             for(int i = 0; i < size; i++) {
                 int now = queue.poll();
-                visited[now] = true;
                 for(int n : rooms.get(now)) {
                     if(visited[n] == false) {
                         queue.add(n);
+                        visited[n] = true;
                     }
                 }
             }
