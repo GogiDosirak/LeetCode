@@ -11,11 +11,10 @@ class Solution {
     }
 
     public void DFS(List<List<Integer>> rooms, int room) {
-        List<Integer> list = rooms.get(room);
         visited[room] = true;
-        for(int i = 0; i < list.size(); i++) {
-            if(visited[list.get(i)] == false) {
-                DFS(rooms, list.get(i));
+        for(int n : rooms.get(room)) {
+            if(visited[n] == false) {
+                DFS(rooms, n);
             }
         }
     }
