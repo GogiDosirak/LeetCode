@@ -10,34 +10,35 @@ class Solution {
             }
         }
 
-        // 이분 그래프 - 정점을 두 개의 집합 A와 B로 나눌 수 있는 그래프
-        // 같은 집합 끼리는 절대 간선이 없어야함
-        // 집합 A = {0, 2}, 집합 B = {1, 3} - 모든 간선은 A <-> B로 연결 가능
-
-        // 시작 노드를 A 집합에 넣으면, 인접 노드는 B집합, -> 또 인접 노드는 A 집합..  이 규칙을 깨게끔 집합이 되어있다면 false
-        // 아니라면 true 반환
-        // 1은 집합 A, -1은 집합 B
         check = new int[graph.length];
 
-        // 연결되지 않은 경우도 확인.
-        for(int i = 0; i < graph.length; i++) {
-            if(check[i] == 0) {
-                if(!DFS(list, i, 1)) return false;
-            }
-        }
-        return true;
+        return BFS(list);
     }
 
-    // 결과를 상위 재귀까지 return 해야함 -> boolean 반환
-    public boolean DFS(List<List<Integer>> list, int node, int state) {
-        check[node] = state;
-        for(int n : list.get(node)) {
-            if(check[n] == 0) {
-                if(!DFS(list, n, -state)) return false;
-            } else if(check[n] == state) {
-                return false;
+    
+    public boolean BFS(List<List<Integer>> list) {
+        // 모든 노드에서 시작해야 연결되지 않은 곳도 탐색 가능
+        // 대신 check 배열로 중복 탐색은 하지 않을 것
+        for(int i = 0; i < list.size(); i++) {
+            if(check[i] == 0) {
+                Queue<Integer> queue = new LinkedList<>();
+                queue.add(i);
+                check[i] = 1;
+
+                while(!queue.isEmpty()) {
+                    int node = queue.poll();
+                    for(int n : list.get(node)) {
+                        if(check[n] == 0) {
+                            queue.add(n);
+                            check[n] = -check[node];
+                        } else if(check[n] == check[node]) {
+                            return false;
+                        } 
+                    }
+                }
             }
         }
+        // false로 return 되지 않았다면 전부 만족하는 것이므로 true 반환
         return true;
     }
 }
