@@ -33,7 +33,6 @@ class Solution {
         check[node] = state;
         for(int n : list.get(node)) {
             if(check[n] == 0) {
-                check[n] = -state;
                 if(!DFS(list, n, -state)) return false;
             } else if(check[n] == state) {
                 return false;
