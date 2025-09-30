@@ -1,29 +1,19 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        int[] answer = new int[2];
-        int[][] arr = new int[nums.length][2];
+        // 값, 인덱스
+        Map<Integer,Integer> map = new HashMap<>();
+
+        // 중복값 존재 가능 -> 값을 만족한다면 꺼내고, 아니라면 덮어씌우기
         for(int i = 0; i < nums.length; i++) {
-            arr[i][0] = nums[i];
-            arr[i][1] = i;
-        }
-
-        Arrays.sort(arr, (a,b) -> a[0] - b[0]);
-
-        int lt = 0;
-        int rt = nums.length - 1;
-
-        while(lt <= rt) {
-            int sum = arr[lt][0] + arr[rt][0];
-            if(sum == target) {
-                answer[0] = arr[lt][1];
-                answer[1] = arr[rt][1];
-                break;
-            } else if(sum > target) {
-                rt--;
-            } else {
-                lt++;
+            if(map.containsKey(target - nums[i])) {
+                return new int[]{i,map.get(target-nums[i])};
             }
+
+            // 아니라면 map에 넣기
+            map.put(nums[i], i);
         }
-        return answer; 
+
+        // 정답은 무조건 존재
+        return null;
     }
 }
