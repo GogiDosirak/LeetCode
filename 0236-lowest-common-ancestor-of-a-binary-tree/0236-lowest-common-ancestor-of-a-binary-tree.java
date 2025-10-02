@@ -9,27 +9,25 @@
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        // LCA - 가장 깊은 공통 조상
-        // “조상”에는 자기 자신도 포함
-        // 노드의 최대 개수는 10^5 - O(N^2) 불가능
-        // 각 노드의 value는 unique
-        if(root == null || root == p || root == q) {
+        // 사고과정 - 왼쪽 / 오른쪽 탐색을 해 
+        // 왼쪽이나 오른쪽에서 p나 q를 만난다면 아래는 더 이상 탐색할 필요가 없음 -> return
+        // 왼쪽이나 오른쪽에만 값이 있다면 둘 다 왼쪽/오른쪽에만 있음 -> left/right 반환
+        // 둘 다 있다면 그 둘의 root 노드가 LCA -> root 반환
+        if(root == p || root == q) {
             return root;
         }
+        
+        if(root == null) {
+            return null;
+        }
 
-        // 왼쪽 탐색
         TreeNode left = lowestCommonAncestor(root.left, p, q);
-        // 오른쪽 탐색
         TreeNode right = lowestCommonAncestor(root.right, p, q);
 
-        // 만약 왼쪽 오른쪽에서 골고루 p,q가 발견됐다면
-        // 그 재귀의 root 노드가 LCA
         if(left != null && right != null) {
             return root;
         }
 
-        // 왼쪽에서만 발견됐다면, 왼쪽 재귀의 루트가 LCA
-        // 오른쪽에서만 발견됐다면, 오른쪽 재귀의 루트가 LCA
         if(left != null && right == null) {
             return left;
         } else {
