@@ -30,8 +30,14 @@ class Solution {
 
         if(left != null && right == null) {
             return left;
-        } else {
+        } 
+        if(left == null && right != null) {
             return right;
         }
+        if(left == null && right == null) {
+            return null;
+        }
+
+        return null;
     }
 }
