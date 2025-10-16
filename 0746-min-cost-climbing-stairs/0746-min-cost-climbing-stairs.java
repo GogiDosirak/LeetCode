@@ -12,8 +12,6 @@ class Solution {
     }
 
     public int dynamic(int n, int[] cost) {
-        if (n == 0) return cost[0];
-        if (n == 1) return cost[1];
         if (dp[n] != -1) return dp[n];
 
         if(n == cost.length) {
