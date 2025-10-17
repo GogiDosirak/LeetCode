@@ -1,8 +1,13 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        // 선수과목이 존재 -> 위상정렬
+        int[] indegree = new int[numCourses];
 
-        // 인접리스트로 구현
+        // 차수 세팅
+        for(int i = 0; i < prerequisites.length; i++) {
+            indegree[prerequisites[i][0]]++;
+        }
+
+        // 그래프 세팅
         List<List<Integer>> graph = new ArrayList<>();
         for(int i = 0; i < numCourses; i++) {
             graph.add(new ArrayList<>());
@@ -12,41 +17,28 @@ class Solution {
             graph.get(prerequisites[i][1]).add(prerequisites[i][0]);
         }
 
-        int count = 0;
-
-        // indegree 구하기
-        // 예를 들어 [1,0] 이면, 0 -> 1로 거쳐야함
-        int[] indegrees = new int[numCourses];
-        for(int[] arr : prerequisites) {
-            indegrees[arr[0]]++;
-        }
-
         Queue<Integer> queue = new LinkedList<>();
 
-        // 초기세팅
-        for(int i = 0; i < numCourses; i++) {
-            if(indegrees[i] == 0) {
+        // 차수 0인 과목들 애들 큐에 넣기
+        for(int i = 0; i < indegree.length; i++) {
+            if(indegree[i] == 0) {
                 queue.add(i);
             }
         }
 
+        // 큐를 돌면서 갈 수 있는 애들 차수 -- 해주고.. 0이면 다시 큐에 넣고..
+        int count = 0;
         while(!queue.isEmpty()) {
-            // 탐색하고 차수 1씩 줄이기
-            int size = queue.size();
-            for(int i = 0; i < size; i++) {
-                int now = queue.poll();
-                count++;
-                for(int n : graph.get(now)) {
-                    indegrees[n]--;
-                    if(indegrees[n] == 0) {
-                       queue.add(n);
-                    }
+            // 강의를 들은 수
+            int course = queue.poll();
+            count++;
+            for(int next : graph.get(course)) {
+                indegree[next]--;
+                if(indegree[next] == 0) {
+                    queue.add(next);
                 }
             }
         }
-
-        // 모든 노드를 거쳤다면 완강이 가능한 것이므로 true 반환
-        // 아니라면 false 반환
-        return numCourses == count;
+        return count == numCourses;
     }
 }
